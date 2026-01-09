@@ -1,13 +1,13 @@
 from VIS_FT import visFTDriver
 
-import math, time, os
+import time, os
 import numpy as np
 from threading import Thread, Lock
-import copy
 import sys
 from alive_progress import alive_bar
 import matplotlib.pyplot as plt
 from datetime import datetime
+import seaborn as sns
 
 if __name__ == "__main__":
     print("init VisualFT")
@@ -52,21 +52,22 @@ if __name__ == "__main__":
 
     # plotting sensor values
     data = np.array(data)
+    data = np.abs(data)
     dataTime = np.array(dataTime)
 
-    os.makedirs('runs', exist_ok=True) # for saving runs
+    os.makedirs('runs40N', exist_ok=True) # for saving runs
     
     timestamp = datetime.now().strftime('%Y%m%d_%H%M%S')
     
     combined_data = np.column_stack((dataTime, data))
     header = 'time,fx,fy,fz,mx,my,mz'
     np.savetxt(f'runs/visft_data_{timestamp}.csv', combined_data, delimiter=',', header=header, comments='')
-    
+    sns.set_theme()
     plt.figure(figsize=(10, 6))
     plt.plot(dataTime, data[:, 5])
     plt.xlabel('Time (s)')
     plt.ylabel('Z-Moment (Nm)')
-    plt.title('Z-Moment over Time')
+    plt.title('Z-Moment over Time with 40 N Input Force (VC)')
     plt.grid(True)
     plt.savefig(f'runs/z_moment_{timestamp}.png', dpi=300, bbox_inches='tight')
     plt.show()

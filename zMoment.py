@@ -61,7 +61,7 @@ if __name__ == "__main__":
     
     combined_data = np.column_stack((dataTime, data))
     header = 'time,fx,fy,fz,mx,my,mz'
-    np.savetxt(f'runs/visft_data_{timestamp}.csv', combined_data, delimiter=',', header=header, comments='')
+    np.savetxt(f'runs40N/visft_data_{timestamp}.csv', combined_data, delimiter=',', header=header, comments='')
     sns.set_theme()
     plt.figure(figsize=(10, 6))
     plt.plot(dataTime, data[:, 5])
@@ -69,7 +69,7 @@ if __name__ == "__main__":
     plt.ylabel('Z-Moment (Nm)')
     plt.title('Z-Moment over Time with 40 N Input Force (VC)')
     plt.grid(True)
-    plt.savefig(f'runs/z_moment_{timestamp}.png', dpi=300, bbox_inches='tight')
+    plt.savefig(f'runs40N/z_moment_{timestamp}.png', dpi=300, bbox_inches='tight')
     plt.show()
     
     print(f"Data saved to runs/visft_data_{timestamp}.csv")

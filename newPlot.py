@@ -17,9 +17,10 @@ for filename in os.listdir(data_dir):
         continue
     data = np.genfromtxt(os.path.join(data_dir, filename), delimiter=',', skip_header=1)
     time = data[:, 0]
+    mx = data[:, 4]
     my = data[:, 5]
     mz = data[:, 6]
-    moment_sum = np.abs(my) + np.abs(mz)
+    moment_sum = np.abs(mx) + np.abs(mz)
     if time_ref is None:
         time_ref = time
     else:
